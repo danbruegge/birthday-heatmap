@@ -119,7 +119,7 @@ export default function Home() {
             let monthWeight = Math.min(
               Math.round((monthWeightList[month] / maxMonthWeight) * 100) - 20,
             );
-            monthWeight = Math.round(monthWeight / 10) * 10;
+            monthWeight = Math.round(monthWeight / 10) * 10 || 0;
 
             return (
               <div
