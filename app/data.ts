@@ -196,4 +196,3 @@ export const PEOPLE = [
   { name: "Lina Frank", birthday: "1999-04-07" },
   { name: "Maja Berger", birthday: "1993-07-21" },
 ];
-
