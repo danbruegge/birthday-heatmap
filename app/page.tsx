@@ -1,8 +1,9 @@
 "use client"
 
+import { useRef, useState, type MouseEvent } from "react";
+
 import { PEOPLE } from "@/app/data";
 import { MONTHS } from "@/app/static-date-data";
-import { useRef, useState } from "react";
 
 type Person = {
   name: string;
@@ -28,7 +29,9 @@ export default function Home() {
   const fileRef = useRef<HTMLInputElement>(null);
   const [fileData, setFileData] = useState<Person[] | null>(null);
 
-  function handleReset() {
+  function handleReset(e: MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+
     setFileData(null);
 
     if (fileRef.current) {
@@ -36,11 +39,17 @@ export default function Home() {
     }
   }
 
+  function handleExampleData(e: MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+
+    setFileData(PEOPLE);
+  };
+
   let daysOfMonth = MONTHS.map((month) => {
     return [...Array(month.days)].map(() => 0);
   });
 
-  (fileData ?? PEOPLE).forEach((item) => {
+  fileData?.forEach((item) => {
     const [_, month, day] = item.birthday.split("-");
     const m = parseInt(month, 10);
     const d = parseInt(day, 10);
@@ -91,6 +100,12 @@ export default function Home() {
             onClick={handleReset}
           >
             Reset
+          </button>
+          <button
+            className="cursor-pointer px-4 py-2 leading-tight font-medium rounded-md text-black hover:bg-white bg-neutral-300 active:bg-neutral-500 select-none"
+            onClick={handleExampleData}
+          >
+            Use example data
           </button>
         </form>
         <div className="flex gap-8 sm:gap-4 flex-wrap">
